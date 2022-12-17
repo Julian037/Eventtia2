@@ -1,17 +1,23 @@
 import {Fragment, React, useEffect, useState} from "react";
 import {useParams} from 'react-router-dom';
-import { EliminarProducto, productoSeleccionado } from "../funciones/data";
+import { productoSeleccionado } from "../funciones/data";
 import { Nav } from "./Nav";
 
 function Producto() {
 
     const [producto,setProducto] = useState(null)
 
+    const [activeSlide , setActiveSlide] = useState(0)
+
+    function changeSlide (index) {
+        setActiveSlide(index)
+    }
+
     const params = useParams()
 
     useEffect(() => {
         productoSeleccionado(params.id, setProducto)
-    }, [])
+    }, [params.id])
 
     return(
         <>
@@ -25,11 +31,36 @@ function Producto() {
                     <div className="container-product">
                         <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false" style={{maxWidth: '35rem'}}>
                             <div className="carousel-indicators">
-                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+
+                                {producto.images.map( (image, i) => (
+                                    // <>
+                                    // <button key={i} type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={i} className={i === 0 ? "active" : ""} aria-current={i === 0 ? "true" : ""} aria-label={`Slide ${i}`}></button>
+                                    // {console.log(i)}
+                                    // </>
+                                    
+      
+                                    <button onClick={() => changeSlide(i)} type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={i} className="active" aria-current="true" aria-label={`Slide ${i}`}></button>
+                                ))}
+
+                                              
+
+                                {/* <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button> */}
                             </div>
                             <div className="carousel-inner">
+
+                                {producto.images.map ( (image, i) => (
+                                   
+                                    <div className={ activeSlide === i ? "carousel-item active" : "carousel-item"}> 
+                                    <img src={image} className="d-block w-100" alt="..." style={{width: '18rem'}}></img>
+                                    <div  className="carousel-caption d-none d-md-block">
+                                    </div>
+                                    </div>
+                                
+
+                                ))}
+{/* 
                                 <div className="carousel-item active">
                                 <img src={producto.images[0]} className="d-block w-100" alt="..." style={{width: '18rem'}}></img>
                                 <div className="carousel-caption d-none d-md-block">
@@ -44,7 +75,9 @@ function Producto() {
                                 <img src={producto.images[2]} className="d-block w-100" alt="..."></img>
                                 <div className="carousel-caption d-none d-md-block">
                                 </div>
-                                </div>
+                                </div> */
+                                'carouselActive'
+                                }
                             </div>
                         </div>
 
