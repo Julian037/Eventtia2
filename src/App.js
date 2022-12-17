@@ -1,9 +1,9 @@
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Inicio  from './componentes/Inicio';
-import { Producto } from './componentes/Producto';
+import Home  from './componentes/Home/Home';
+import { Producto } from './componentes/DetailsProduct/Producto';
 import { Cesta } from './componentes/Cesta';
-import { AgregarProducto } from './componentes/AgregarProducto';
+import { AgregarProducto } from './AddProduct/AgregarProducto';
 import {Login} from './componentes/Login';
 import {Context} from  './context/Context.jsx'
 
@@ -14,8 +14,7 @@ function App() {
     <Context>
   <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Inicio></Inicio>}></Route>
-          <Route path='/home' element={<Inicio></Inicio>}></Route>
+          <Route path='/' element={<Home></Home>}></Route>
           <Route path='/producto/:id'element={<Producto></Producto>}></Route>
           <Route path='/cesta' element={<Cesta></Cesta>}></Route>
           <Route path='/agregarProducto' element={<AgregarProducto></AgregarProducto>}></Route>

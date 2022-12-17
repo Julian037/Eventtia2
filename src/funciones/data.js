@@ -5,8 +5,8 @@ import axios from "axios";
 //     state(peticion.data.products)
 // }
 
-const fetchAllProducts = async (state, skip) => {
-    const peticion = await axios.get(`https://dummyjson.com/products?limit=2&skip=${skip}`)
+const fetchAllProducts = async (state , skip) => {
+    const peticion = await axios.get(`https://dummyjson.com/products?limit=9&skip=${skip}`)
     state(peticion.data.products)
 }
 

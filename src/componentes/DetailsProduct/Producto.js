@@ -1,7 +1,8 @@
 import {Fragment, React, useEffect, useState} from "react";
 import {useParams} from 'react-router-dom';
-import { productoSeleccionado } from "../funciones/data";
-import { Nav } from "./Nav";
+import { productoSeleccionado } from "../../funciones/data";
+import { Nav } from "../Nav";
+import './DetailsProduct.css'
 
 function Producto() {
 
@@ -31,22 +32,9 @@ function Producto() {
                     <div className="container-product">
                         <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false" style={{maxWidth: '35rem'}}>
                             <div className="carousel-indicators">
-
                                 {producto.images.map( (image, i) => (
-                                    // <>
-                                    // <button key={i} type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={i} className={i === 0 ? "active" : ""} aria-current={i === 0 ? "true" : ""} aria-label={`Slide ${i}`}></button>
-                                    // {console.log(i)}
-                                    // </>
-                                    
-      
                                     <button onClick={() => changeSlide(i)} type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={i} className="active" aria-current="true" aria-label={`Slide ${i}`}></button>
                                 ))}
-
-                                              
-
-                                {/* <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button> */}
                             </div>
                             <div className="carousel-inner">
 
@@ -80,9 +68,50 @@ function Producto() {
                                 }
                             </div>
                         </div>
+        
+                        <h1 className="title">{producto.title}</h1>  
+                       
+                        <table class="table table-striped">
+                
+                        <tbody>
+                            <tr>
+                                <td>Identificación del producto</td>
+                                <td> {params.id}</td>
+                            </tr>
+                            <tr>
+                                <td>Marca:</td>
+                                <td> {producto.brand}</td>
+                            </tr>
+                            <tr>
+                                <td>Categoria:</td>
+                                <td>{producto.category}</td>
+                            </tr>
+                            <tr> 
+                                <td>Descripción: </td>
+                                <td>{producto.description}</td>
+                            </tr>
+                            <tr>
+                                <td>Descuento:</td>
+                                <td> {producto.discountPercentage}</td> 
+                            </tr>
+                            <tr> 
+                                <td>Precio:</td>
+                                <td>{producto.price}</td>
+                            </tr>
+                            <tr>
+                                <td>Calificación:</td>
+                                <td>{producto.rating}</td>  
+                            </tr>
+                            <tr> 
+                                <td>Stock:</td>
+                                <td>{producto.stock}</td>
+                            </tr>
+  </tbody>
+</table>
 
-
-                        <h1>Producto con el id {params.id}</h1>
+        
+                            
+                        {/* <h1>Producto con el id {params.id}</h1>
                         <h1>{producto.title}</h1>  
                         <p>Marca: {producto.brand}</p> 
                         <p>Categoria: {producto.category}</p> 
@@ -90,7 +119,7 @@ function Producto() {
                         <p>Descuento: {producto.discountPercentage}</p> 
                         <p>Precio: {producto.price}</p> 
                         <p>Calificación: {producto.rating}</p> 
-                        <p>Stock: {producto.stock}</p>
+                        <p>Stock: {producto.stock}</p> */}
                         
 
                     </div>
