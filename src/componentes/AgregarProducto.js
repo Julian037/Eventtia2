@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import { allProductos } from '../funciones/data'
+import { fetchAllProducts } from '../funciones/data'
 import { Nav } from './Nav'
 import { eliminarProducto } from '../funciones/data'
 import { agregarProducto } from '../funciones/data'
@@ -16,7 +16,7 @@ function AgregarProducto() {
     }
 
     useEffect( () => {
-        allProductos(setProductos)
+        fetchAllProducts(setProductos)
     }, [])
 
     function test (i) {

@@ -1,9 +1,15 @@
 import axios from "axios";
 
-const allProductos = async (state) => {
-    const peticion = await axios.get('https://dummyjson.com/products?limit=100')
+// const fetchAllProducts = async (state) => {
+//     const peticion = await axios.get('https://dummyjson.com/products?total0=10&skip=2')
+//     state(peticion.data.products)
+// }
+
+const fetchAllProducts = async (state, skip) => {
+    const peticion = await axios.get(`https://dummyjson.com/products?limit=2&skip=${skip}`)
     state(peticion.data.products)
 }
+
 
 const productoSeleccionado = async (id, state) => {
     const peticion = await axios.get(`https://dummyjson.com/products/${id}`)
@@ -60,7 +66,7 @@ const agregarProducto = async (title) => {
 
 
 export {
-    allProductos,
+    fetchAllProducts,
     productoSeleccionado,
     eliminarProducto,
     agregarProducto,
