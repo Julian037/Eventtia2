@@ -15,7 +15,11 @@ const fetchAddProduct = async (title) => {
         title: title,
     })
     .then(function (response) {
-        console.log(response)
+        if(response.status === 200) {
+            console.log(`Respuesta ${response.status}. Adición exitosa `)
+            } else {
+            console.log("Ha ocurrido algo inesperado. Intente nuevamente")
+            }
     })
     .catch ( function ( error ) {
         console.log(error)
@@ -25,33 +29,33 @@ const fetchAddProduct = async (title) => {
 const fetchSearchProduct = async (state , searchItem) =>{
     const peticion =  await axios.get(`https://dummyjson.com/products/search?q=${searchItem}`)
     state(peticion.data.products)
-    // state(peticion.data.products)
     .then(function (response) {
-        console.log(response)
+        console.log(response.status)
     })
     .catch ( function ( error ) {
         console.log(error)
     })
 }
 
+const fetDeleteProduct = async (id) => {
+    try {
+        await axios.delete(`https://dummyjson.com/products/${id}`)
+        .then ( function (response) {
+            if(response.status === 200) {
+            console.log(`Respuesta ${response.status}. Eliminación exitosa`)
+            } else {
+            console.log("Ha ocurrido algo inesperado. Intente nuevamente")
+            }
+        })
+    }  
+    catch (e) {console.log(e)}
+}
+
+
 const productoSeleccionado = async (id, state) => {
     const peticion = await axios.get(`https://dummyjson.com/products/${id}`)
     state(peticion.data)
     //console.log(peticion.data)
-}
-
-const eliminarProducto = async (id) => {
-    try {
-        const peticion = await axios.delete(`https://dummyjson.com/products/${id}`)
-        .then ( function (response) {
-           if(response.status === 200) {
-            console.log(`Todo ok ${response.status}`)
-           } else {
-            console.log("No se recibe respuesta")
-           }
-        })
-    }  
-    catch (e) {console.log(e)}
 }
 
 const login = async (username, password ) => {
@@ -68,15 +72,11 @@ const login = async (username, password ) => {
         })
 }
 
-
-
-
 export {
     fetchAllProducts,
     fetchAddProduct,
     fetchSearchProduct,
     productoSeleccionado,
-    eliminarProducto,
-    login
-
+    login,
+    fetDeleteProduct
 }

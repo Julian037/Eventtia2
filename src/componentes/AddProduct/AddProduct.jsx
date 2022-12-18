@@ -1,102 +1,99 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { fetchAllProducts } from '../../funciones/data'
 import Nav from '../Nav'
-import { eliminarProducto } from '../../funciones/data'
-import { fetchAddProduct } from '../../funciones/data'
+import { fetchAddProduct, fetDeleteProduct } from '../../funciones/data'
+import './AddProductStyle.css'
+
 
 function AddProduct() {
 
-    const [productos, setProductos] = useState([])
+    const initialValue = {
+            category: null,
+            price: null,
+            stock: null,
+    }
 
-    const [title, setTitle] = useState()
+    const [products, setProducts] = useState([])
+    const [titleForFetch, setTitleForFetch] = useState()
+    const [additionalData, setAdditionalData] = useState(initialValue)
 
-    function cambio (e) {
-        setTitle(e.target.value)
-        console.log(e.target.value)
+    function handleChangesInput (e, key) {
+        setTitleForFetch(e.target.value)
+        setAdditionalData({
+            ...additionalData,
+            [key]: e.target.value
+        });
+        // if(additionalData.category !== null && additionalData.price !== null && additionalData.stock !== null){
+        //     setTestBoton(true)
+        // }
     }
 
     useEffect( () => {
-        fetchAllProducts(setProductos, 0)
+        fetchAllProducts(setProducts, 0)
     }, [])
 
-    function test (i) {
-
-        console.log(productos)
-        const newProduct = {
-            brand: "",
-            category: "",
-            description: "",
-            discountPercentage: 3 ,
-            id: 101 ,
-            images: null,
-            price: 5,
-            rating:66 ,
-            stock: 55,
-            thumbnail: "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-            title: i
-        };
-
-        setProductos(productos => [ ...productos, newProduct]);
-        console.log(productos)
-         
-        console.log(newProduct);
+    const addAdditionalData = () => {
+        setProducts(products => [ ...products, additionalData]);
+    }
+    
+    function deleteSimulatorData (i) {
+        const newProduct = products.filter(producto => producto.id !== i)
+        setProducts(newProduct) 
     }
 
-
-    function filtrarProducto (i) {
-        
-        const newProduct = productos.filter(producto => producto.id !== i)
-        console.log(i)
-       
-        setProductos(newProduct) 
-
+    function dispatcherDeleteFetch (i) {
+        deleteSimulatorData(i);
+        fetDeleteProduct(i)
     }
 
-    function eliminar (i) {
-        filtrarProducto(i);
-        eliminarProducto(i)
-    }
-
-    function agregar (i) {
-        test(i);
+    function dispatcherAddFetchAndAdditionalData (i) {
         fetchAddProduct(i)
+        addAdditionalData()
     }
 
     return(
             <Fragment>
                 <Nav></Nav>
-                <div className="row">
-                    <div className="col-md-4">
-                        <input onChange={cambio}></input>
-                        <button onClick={() => agregar(title)}>agregar</button>
+                <div className='d-flex justify-content-around mt-3'>
+                    <div class="form-floating mb-3">
+                        <input onChange={(e) => handleChangesInput( e, 'title')} class="form-control" id="floatingInput" placeholder="Producto"/>
+                        <label for="floatingInput">Producto</label>
                     </div>
-                    <div className="col-md-8">
-                        <ul>
-                        {productos != undefined ? (
-                        productos.map(producto => (
-                            
-                            <div key={producto.id} className="product">
-                                <div className="container">
-                                <div className="card" style={{maxWidth: '35rem'}}>
-                            
-                                <div className="card-body">
-                                    <h5 className="card-title">{producto.title}</h5>
-                                    <button test>Modificar</button>
-                                    <button onClick={() => eliminar(producto.id)}>eliminar</button>
+                    <div class="form-floating mb-3">
+                        <input  onChange={(e) => handleChangesInput( e, 'category')} class="form-control" id="floatingInput" placeholder="Categoría"/>
+                        <label for="floatingInput">Categoría</label>
                     </div>
+                    <div class="form-floating mb-3">
+                        <input  onChange={(e) => handleChangesInput( e, 'price')} class="form-control" id="floatingInput" placeholder="Precio"/>
+                        <label for="floatingInput">Precio</label>
                     </div>
-                </div>
-                </div>
-
-                
-
-            ))
-        ) : ('Cargando....')}
-                        </ul>
+                    <div class="form-floating mb-3">
+                        <input  onChange={(e) => handleChangesInput( e, 'stock')} class="form-control" id="floatingInput" placeholder="Cantidad"/>
+                        <label for="floatingInput">Cantidad</label>
                     </div>
-                </div>
+                    <div className='d-flex align-items-center'>   
+                        <button onClick={() => dispatcherAddFetchAndAdditionalData(titleForFetch)} type="button" class="btn btn-success">Agregar</button>
+                    </div>
+                </div>  
+                <table class="table table-striped ">
+                    <tbody className=''> 
+                    {products !== undefined ? 
+                        (products.map(producto => (
+                            <tr>
+                                <td>Producto: </td>
+                                <td>{producto.title}</td>
+                                <td>Categoria: </td>
+                                <td>{producto.category}</td>
+                                <td>Precio: </td>
+                                <td>{producto.price}</td>
+                                <td>Cantidad: </td>
+                                <td>{producto.stock}</td>
+                                <button onClick={() => dispatcherDeleteFetch(producto.id)}>X</button> 
+                            </tr>
+                        ))) : ('Cargando....')}
+                    </tbody>
+                </table>
             </Fragment>
-
     )
 }
 
