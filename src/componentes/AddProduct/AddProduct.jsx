@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import { fetchAllProducts } from '../funciones/data'
-import { Nav } from '../componentes/Nav'
-import { eliminarProducto } from '../funciones/data'
-import { agregarProducto } from '../funciones/data'
+import { fetchAllProducts } from '../../funciones/data'
+import { Nav } from '../Nav'
+import { eliminarProducto } from '../../funciones/data'
+import { fetchAddProduct } from '../../funciones/data'
 
-function AgregarProducto() {
+function AddProduct() {
 
     const [productos, setProductos] = useState([])
 
@@ -59,7 +59,7 @@ function AgregarProducto() {
 
     function agregar (i) {
         test(i);
-        agregarProducto(i)
+        fetchAddProduct(i)
     }
 
     return(
@@ -100,4 +100,4 @@ function AgregarProducto() {
     )
 }
 
-export {AgregarProducto}
+export default AddProduct

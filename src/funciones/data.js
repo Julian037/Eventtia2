@@ -10,6 +10,17 @@ const fetchAllProducts = async (state , skip) => {
     state(peticion.data.products)
 }
 
+const fetchAddProduct = async (title) => {
+    await axios.post('https://dummyjson.com/products/add' , {
+        title: title,
+    })
+    .then(function (response) {
+        console.log(response)
+    })
+    .catch ( function ( error ) {
+        console.log(error)
+    })
+} 
 
 const productoSeleccionado = async (id, state) => {
     const peticion = await axios.get(`https://dummyjson.com/products/${id}`)
@@ -47,29 +58,13 @@ const login = async (username, password ) => {
 }
 
 
-const agregarProducto = async (title) => {
-    
-        await axios.post('https://dummyjson.com/products/add' , {
-            title: title,
-            
-        })
-        .then(function (response) {
-            console.log(response)
-        })
-        .catch ( function ( error ) {
-            console.log(error)
-        })
-    } 
-    
-   
-
 
 
 export {
     fetchAllProducts,
     productoSeleccionado,
     eliminarProducto,
-    agregarProducto,
+    fetchAddProduct,
     login
 
 }

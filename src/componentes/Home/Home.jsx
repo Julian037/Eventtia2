@@ -51,8 +51,6 @@ function Home() {
                         <h5 className="card-title">{producto.title}</h5>
                         <p className="card-text">{producto.description}</p>
                         <a href={`/producto/${producto.id}`} className="btn btn-primary">Más información</a>
-                        {/* <button onClick={() => eliminarProducto(producto.id)}>eliminar</button>
-                        <button onClick={() => agregarProducto(producto.id)}>agregar</button> */}
                     </div>
                     </div>
                 </div>
