@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
-import { useState } from 'react'
 
-function Nav() {
+function Nav({fetchSearchProduct, handleSearchProductChanges, searchedProduct, setProducts}) {
     return(
         <Fragment>
             <nav className="navbar navbar-expand-lg bg-light">
@@ -15,18 +14,14 @@ function Nav() {
                         <li className="nav-item">
                         <a className="nav-link active" aria-current="page" href="/">Inicio</a>
                         </li>
-        
                         <li className="nav-item">
                         <a className="nav-link active" aria-current="page" href="/agregarProducto">Agregar Producto</a>
                         </li>
-
-
-
                     </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                     <div className="d-flex" role="search">
+                        <input onChange={handleSearchProductChanges} className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                        <button onClick={() => fetchSearchProduct( setProducts ,searchedProduct)} className="btn btn-outline-success">Search</button>
+                    </div>
                     </div>
                 </div>
             </nav>
@@ -35,4 +30,4 @@ function Nav() {
     )
 }
 
-export {Nav}
+export default Nav

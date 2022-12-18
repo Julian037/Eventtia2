@@ -1,6 +1,6 @@
 import {Fragment, React, useEffect, useState} from "react";
-import { agregarProducto, fetchAllProducts, eliminarProducto, login } from "../../funciones/data.js";
-import { Nav } from "../Nav.js";
+import { fetchAllProducts, fetchSearchProduct } from "../../funciones/data.js";
+import Nav from "../Nav.js";
 import { useContext } from "react";
 import { ProviderContext } from "../../context/Context.jsx";
 import './HomeStyle.css'
@@ -11,6 +11,8 @@ function Home() {
 
     const [products, setProducts] = useState(null)
     const [skip, setSkip] = useState(0)
+
+    const [searchedProduct, setSearchedProduct] = useState()
 
     console.log()
 
@@ -24,20 +26,38 @@ function Home() {
 
     useEffect( () => {
         fetchAllProducts(setProducts, skip)
-    }, [skip])
+    }, [skip, searchedProduct])
+
+    
+    /////
+
+   
+
+    const handleSearchProductChanges = (e) => {
+        setSearchedProduct(e.target.value)
+
+    }
+    console.log(searchedProduct)
+    
     
     return(
         <Fragment>
             
-        <Nav></Nav>
+        <Nav 
+            fetchSearchProduct={fetchSearchProduct}
+            handleSearchProductChanges={handleSearchProductChanges}
+            searchedProduct={searchedProduct}
+            setProducts={setProducts}
+            >
+                
+        </Nav>
 
         <div className="btnContainer d-flex justify-content-end mt-3">
             <div className="col-1"> <button disabled={skip <= 0 ? true : false} onClick={previousPage} type="button" class={skip > 0 ? "btn btn-outline-primary w-100" : "btn btn-outline-secondary w-100" }>Anterior</button></div>
             <div className="col-1 ms-3 "><button onClick={nextPage}  type="button" class="btn btn-outline-primary w-100">Siguiente</button></div>
         
         </div>  
-        
-        <h1>{test.saludo}</h1>
+    
             <div className="test" >
             {products != null ? (
             products.map(producto => (

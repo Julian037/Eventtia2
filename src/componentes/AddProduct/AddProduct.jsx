@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { fetchAllProducts } from '../../funciones/data'
-import { Nav } from '../Nav'
+import Nav from '../Nav'
 import { eliminarProducto } from '../../funciones/data'
 import { fetchAddProduct } from '../../funciones/data'
 

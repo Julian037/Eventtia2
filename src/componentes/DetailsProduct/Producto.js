@@ -1,7 +1,7 @@
 import {Fragment, React, useEffect, useState} from "react";
 import {useParams} from 'react-router-dom';
 import { productoSeleccionado } from "../../funciones/data";
-import { Nav } from "../Nav";
+import  Nav from "../Nav";
 import './DetailsProduct.css'
 
 function Producto() {

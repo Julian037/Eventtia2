@@ -22,6 +22,18 @@ const fetchAddProduct = async (title) => {
     })
 } 
 
+const fetchSearchProduct = async (state , searchItem) =>{
+    const peticion =  await axios.get(`https://dummyjson.com/products/search?q=${searchItem}`)
+    state(peticion.data.products)
+    // state(peticion.data.products)
+    .then(function (response) {
+        console.log(response)
+    })
+    .catch ( function ( error ) {
+        console.log(error)
+    })
+}
+
 const productoSeleccionado = async (id, state) => {
     const peticion = await axios.get(`https://dummyjson.com/products/${id}`)
     state(peticion.data)
@@ -38,8 +50,7 @@ const eliminarProducto = async (id) => {
             console.log("No se recibe respuesta")
            }
         })
-    } 
-    
+    }  
     catch (e) {console.log(e)}
 }
 
@@ -62,9 +73,10 @@ const login = async (username, password ) => {
 
 export {
     fetchAllProducts,
+    fetchAddProduct,
+    fetchSearchProduct,
     productoSeleccionado,
     eliminarProducto,
-    fetchAddProduct,
     login
 
 }
