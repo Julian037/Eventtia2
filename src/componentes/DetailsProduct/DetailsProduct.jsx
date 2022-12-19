@@ -122,7 +122,7 @@ const DetailsProduct = () => {
                     </table>
                 </div>
                 <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={sendDataToModal}>
-                    Launch demo modal
+                    Actualizar detalles
                 </button>
                 <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">

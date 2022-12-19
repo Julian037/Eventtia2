@@ -43,9 +43,9 @@ function Home() {
 
         <div className="btnContainer d-flex justify-content-end mt-3">
             <div className="col-1"> <button disabled={skip <= 0 ? true : false} onClick={previousPage} type="button" class={skip > 0 ? "btn btn-outline-primary w-100" : "btn btn-outline-secondary w-100" }>Anterior</button></div>
-            <div className="col-1 ms-3 "><button onClick={nextPage}  type="button" class="btn btn-outline-primary w-100">Siguiente</button></div>
+            <div className="col-1 ms-3 "><button disabled={skip === 99 ? true : false} onClick={nextPage}  type="button" class="btn btn-outline-primary w-100">Siguiente</button></div>
         </div>  
-            <div className="test" >
+            <div className="containerProduct" >
             {products != null ? (
             products.map(product => (
                 <div key={product.id} className="product">
