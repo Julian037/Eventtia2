@@ -16,7 +16,7 @@ const fetchAddProduct = async (title) => {
     })
     .then(function (response) {
         if(response.status === 200) {
-            console.log(`Respuesta ${response.status}. Adición exitosa `)
+            console.log(`Respuesta ${response.status}. Adición exitosa`)
             } else {
             console.log("Ha ocurrido algo inesperado. Intente nuevamente")
             }
@@ -64,20 +64,18 @@ const fetchUpdateProduct = async (id , state , title) => {
     state(peticion.data)
     .then(function (response) {
         if(response.status === 200) {
-            // console.log(response)
+            console.log(response)
             console.log(`Respuesta ${response.status}. Actualización exitosa `)
             } else {
             console.log("Ha ocurrido algo inesperado. Intente nuevamente")
             }
     })
-   
     .catch ( function ( error ) {
         console.log(error)
     })
 } 
 
 const login = async (username, password ) => {
-        
         await axios.post('https://dummyjson.com/auth/login' , {
             username: username,
             password: password,

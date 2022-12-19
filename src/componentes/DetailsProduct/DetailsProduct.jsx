@@ -1,7 +1,7 @@
 import {Fragment, React, useEffect, useState} from "react";
 import {useParams} from 'react-router-dom';
-import { fetchSingleProduct, fetchUpdateProduct } from "../../funciones/data";
-import  Nav from "../Nav";
+import { fetchSingleProduct, fetchUpdateProduct } from "../../funciones/API";
+import  Nav from "../Navbar/Navbar";
 import './DetailsProductStyle.css'
 
 const DetailsProduct = () => {

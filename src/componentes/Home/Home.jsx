@@ -1,6 +1,6 @@
 import {Fragment, React, useEffect, useState} from "react";
-import { fetchAllProducts, fetchSearchProduct } from "../../funciones/data.js";
-import Nav from "../Nav.js";
+import { fetchAllProducts, fetchSearchProduct } from "../../funciones/API.js";
+import Navbar from "../Navbar/Navbar.jsx";
 import { useContext } from "react";
 import { ProviderContext } from "../../context/Context.jsx";
 import './HomeStyle.css'
@@ -43,14 +43,14 @@ function Home() {
     return(
         <Fragment>
             
-        <Nav 
+        <Navbar 
             fetchSearchProduct={fetchSearchProduct}
             handleSearchProductChanges={handleSearchProductChanges}
             searchedProduct={searchedProduct}
             setProducts={setProducts}
             >
                 
-        </Nav>
+        </Navbar>
 
         <div className="btnContainer d-flex justify-content-end mt-3">
             <div className="col-1"> <button disabled={skip <= 0 ? true : false} onClick={previousPage} type="button" class={skip > 0 ? "btn btn-outline-primary w-100" : "btn btn-outline-secondary w-100" }>Anterior</button></div>

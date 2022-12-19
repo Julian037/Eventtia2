@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useContext } from 'react'
-import { login } from "../funciones/data.js";
-import {ProviderContext} from '../context/Context'
+import { login } from "../../funciones/API.js";
+import {ProviderContext} from '../../context/Context'
 
 const Login = () => {
   const test = useContext(ProviderContext)
@@ -23,9 +23,7 @@ const cambiarMensaje = () => {
 }
  
     return(
-
-            <Fragment>
-         
+      <Fragment>
         <div className="mb-3">
           <label for="exampleInputEmail1" className="form-label">Email address</label>
           <input onChange={handleUserNameChanges} type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
@@ -39,18 +37,11 @@ const cambiarMensaje = () => {
           <label className="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
         <button  onClick={() => login(inputUserName,inputPassword )}>Submit</button>
-
-      
-      <h1>{test.saludo}</h1>
-      <button onClick={cambiarMensaje}>Cambiar mensaje desde login</button>
-
+        <h1>{test.saludo}</h1>
+        <button onClick={cambiarMensaje}>Cambiar mensaje desde login</button>
       </Fragment>
-        
     )
 }
 
-// kminchelle
-// 0lelplR
 
-
-export {Login}
+export default Login

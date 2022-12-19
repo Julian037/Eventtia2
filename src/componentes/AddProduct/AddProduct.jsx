@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import { fetchAllProducts } from '../../funciones/data'
-import Nav from '../Nav'
-import { fetchAddProduct, fetDeleteProduct } from '../../funciones/data'
+import { fetchAllProducts } from '../../funciones/API'
+import Navbar from '../Navbar/Navbar'
+import { fetchAddProduct, fetDeleteProduct } from '../../funciones/API'
 import './AddProductStyle.css'
 
 const AddProduct = () => {
@@ -49,7 +49,7 @@ const AddProduct = () => {
 
     return(
             <Fragment>
-                <Nav></Nav>
+                <Navbar></Navbar>
                 <div className='d-flex justify-content-around mt-3'>
                     <div className="form-floating mb-3">
                         <input onChange={(e) => handleChangesInput( e, 'title')} className="form-control" id="floatingInput" placeholder="Producto"/>
