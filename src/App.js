@@ -1,7 +1,7 @@
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Home  from './componentes/Home/Home';
-import { Producto } from './componentes/DetailsProduct/Producto';
+import  DetailsProduct  from './componentes/DetailsProduct/DetailsProduct';
 import { Cesta } from './componentes/Cesta';
 import  AddProduct  from './componentes/AddProduct/AddProduct';
 import {Login} from './componentes/Login';
@@ -15,7 +15,7 @@ function App() {
   <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home></Home>}></Route>
-          <Route path='/producto/:id'element={<Producto></Producto>}></Route>
+          <Route path='/producto/:id'element={<DetailsProduct></DetailsProduct>}></Route>
           <Route path='/cesta' element={<Cesta></Cesta>}></Route>
           <Route path='/agregarProducto' element={<AddProduct></AddProduct>}></Route>
           <Route path='/login' element={<Login></Login>}></Route>

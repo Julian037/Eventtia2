@@ -4,8 +4,7 @@ import Nav from '../Nav'
 import { fetchAddProduct, fetDeleteProduct } from '../../funciones/data'
 import './AddProductStyle.css'
 
-
-function AddProduct() {
+const AddProduct = () => {
 
     const initialValue = {
             category: null,
@@ -23,9 +22,6 @@ function AddProduct() {
             ...additionalData,
             [key]: e.target.value
         });
-        // if(additionalData.category !== null && additionalData.price !== null && additionalData.stock !== null){
-        //     setTestBoton(true)
-        // }
     }
 
     useEffect( () => {
@@ -36,18 +32,18 @@ function AddProduct() {
         setProducts(products => [ ...products, additionalData]);
     }
     
-    function deleteSimulatorData (i) {
-        const newProduct = products.filter(producto => producto.id !== i)
+    const deleteSimulatorData = (id) => {
+        const newProduct = products.filter(producto => producto.id !== id)
         setProducts(newProduct) 
     }
 
-    function dispatcherDeleteFetch (i) {
-        deleteSimulatorData(i);
-        fetDeleteProduct(i)
+    const dispatcherDeleteFetch = (id) => {
+        deleteSimulatorData(id);
+        fetDeleteProduct(id)
     }
 
-    function dispatcherAddFetchAndAdditionalData (i) {
-        fetchAddProduct(i)
+    const dispatcherAddFetchAndAdditionalData = (id) => {
+        fetchAddProduct(id)
         addAdditionalData()
     }
 
@@ -55,27 +51,27 @@ function AddProduct() {
             <Fragment>
                 <Nav></Nav>
                 <div className='d-flex justify-content-around mt-3'>
-                    <div class="form-floating mb-3">
-                        <input onChange={(e) => handleChangesInput( e, 'title')} class="form-control" id="floatingInput" placeholder="Producto"/>
+                    <div className="form-floating mb-3">
+                        <input onChange={(e) => handleChangesInput( e, 'title')} className="form-control" id="floatingInput" placeholder="Producto"/>
                         <label for="floatingInput">Producto</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input  onChange={(e) => handleChangesInput( e, 'category')} class="form-control" id="floatingInput" placeholder="Categoría"/>
+                    <div className="form-floating mb-3">
+                        <input  onChange={(e) => handleChangesInput( e, 'category')} className="form-control" id="floatingInput" placeholder="Categoría"/>
                         <label for="floatingInput">Categoría</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input  onChange={(e) => handleChangesInput( e, 'price')} class="form-control" id="floatingInput" placeholder="Precio"/>
+                    <div className="form-floating mb-3">
+                        <input  onChange={(e) => handleChangesInput( e, 'price')} className="form-control" id="floatingInput" placeholder="Precio"/>
                         <label for="floatingInput">Precio</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input  onChange={(e) => handleChangesInput( e, 'stock')} class="form-control" id="floatingInput" placeholder="Cantidad"/>
+                    <div className="form-floating mb-3">
+                        <input  onChange={(e) => handleChangesInput( e, 'stock')} className="form-control" id="floatingInput" placeholder="Cantidad"/>
                         <label for="floatingInput">Cantidad</label>
                     </div>
                     <div className='d-flex align-items-center'>   
-                        <button onClick={() => dispatcherAddFetchAndAdditionalData(titleForFetch)} type="button" class="btn btn-success">Agregar</button>
+                        <button onClick={() => dispatcherAddFetchAndAdditionalData(titleForFetch)} type="button" className="btn btn-success">Agregar</button>
                     </div>
                 </div>  
-                <table class="table table-striped ">
+                <table className="table table-striped ">
                     <tbody className=''> 
                     {products !== undefined ? 
                         (products.map(producto => (

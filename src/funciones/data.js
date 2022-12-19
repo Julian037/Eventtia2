@@ -52,11 +52,29 @@ const fetDeleteProduct = async (id) => {
 }
 
 
-const productoSeleccionado = async (id, state) => {
+const fetchSingleProduct = async (id, state) => {
     const peticion = await axios.get(`https://dummyjson.com/products/${id}`)
     state(peticion.data)
-    //console.log(peticion.data)
 }
+
+const fetchUpdateProduct = async (id , state , title) => {
+    const peticion = await axios.put(`https://dummyjson.com/products/${id}` , {
+        title: title,
+    })
+    state(peticion.data)
+    .then(function (response) {
+        if(response.status === 200) {
+            // console.log(response)
+            console.log(`Respuesta ${response.status}. Actualización exitosa `)
+            } else {
+            console.log("Ha ocurrido algo inesperado. Intente nuevamente")
+            }
+    })
+   
+    .catch ( function ( error ) {
+        console.log(error)
+    })
+} 
 
 const login = async (username, password ) => {
         
@@ -76,7 +94,8 @@ export {
     fetchAllProducts,
     fetchAddProduct,
     fetchSearchProduct,
-    productoSeleccionado,
     login,
-    fetDeleteProduct
+    fetDeleteProduct,
+    fetchSingleProduct,
+    fetchUpdateProduct
 }
