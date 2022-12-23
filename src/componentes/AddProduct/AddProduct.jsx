@@ -1,8 +1,9 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, } from 'react'
 import { fetchAllProducts } from '../../funciones/API'
 import Navbar from '../Navbar/Navbar'
 import { fetchAddProduct, fetDeleteProduct } from '../../funciones/API'
-import './AddProductStyle.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const AddProduct = () => {
 
@@ -84,7 +85,9 @@ const AddProduct = () => {
                                 <td>{producto.price}</td>
                                 <td>Cantidad: </td>
                                 <td>{producto.stock}</td>
-                                <button onClick={() => dispatcherDeleteFetch(producto.id)}>X</button> 
+                                <td>    
+                                <FontAwesomeIcon  icon={faTrash} onClick={() => dispatcherDeleteFetch(producto.id)}/>
+                                </td>
                             </tr>
                         ))) : ('Cargando....')}
                     </tbody>

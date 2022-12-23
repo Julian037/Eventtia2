@@ -4,10 +4,13 @@ import Navbar from "../Navbar/Navbar.jsx";
 import { useContext } from "react";
 import { ProviderContext } from "../../context/Context.jsx";
 import './HomeStyle.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 
 function Home() {
 
-    const test = useContext(ProviderContext)
+    // Probando llamado de context
+    const testContext = useContext(ProviderContext)
 
     const [products, setProducts] = useState(null)
     const [skip, setSkip] = useState(0)
@@ -32,7 +35,7 @@ function Home() {
     
     return(
         <Fragment>
-            
+
         <Navbar 
             fetchSearchProduct={fetchSearchProduct}
             handleSearchProductChanges={handleSearchProductChanges}
@@ -42,10 +45,13 @@ function Home() {
         </Navbar>
 
         <div className="btnContainer d-flex justify-content-end mt-3">
-            <div className="col-1"> <button disabled={skip <= 0 ? true : false} onClick={previousPage} type="button" class={skip > 0 ? "btn btn-outline-primary w-100" : "btn btn-outline-secondary w-100" }>Anterior</button></div>
-            <div className="col-1 ms-3 "><button disabled={skip === 99 ? true : false} onClick={nextPage}  type="button" class="btn btn-outline-primary w-100">Siguiente</button></div>
+            <div className="col-1"> <button disabled={skip <= 0 ? true : false} onClick={previousPage} type="button" class={skip > 0 ? "btn btn-outline-primary w-100" : "btn btn-outline-secondary w-100" }><FontAwesomeIcon  icon={faAngleLeft} /></button></div>
+            <div className="col-1 ms-3 "><button disabled={skip === 99 ? true : false} onClick={nextPage}  type="button" class="btn btn-outline-primary w-100"><FontAwesomeIcon  icon={faAngleRight} /></button></div>
         </div>  
-            <div className="containerProduct" >
+
+        {/* <h1>{testContext.saludo}</h1> */}
+
+        <div className="containerProduct" >
             {products != null ? (
             products.map(product => (
                 <div key={product.id} className="product">
@@ -62,7 +68,7 @@ function Home() {
                 </div>
             ))
             ) : ('Cargando....')}
-            </div>
+        </div>
         </Fragment>
     )
 }

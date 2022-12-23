@@ -75,13 +75,13 @@ const fetchUpdateProduct = async (id , state , title) => {
     })
 } 
 
-const login = async (username, password ) => {
+const fetchLogin = async (username, password ) => {
         await axios.post('https://dummyjson.com/auth/login' , {
             username: username,
             password: password,
         }) 
         .then(function (response) {
-            // console.log(response)
+            console.log(response)
         })
         .catch ( function ( error ) {
             console.log(error)
@@ -92,7 +92,7 @@ export {
     fetchAllProducts,
     fetchAddProduct,
     fetchSearchProduct,
-    login,
+    fetchLogin,
     fetDeleteProduct,
     fetchSingleProduct,
     fetchUpdateProduct

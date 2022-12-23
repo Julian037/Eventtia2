@@ -6,14 +6,15 @@ import './DetailsProductStyle.css'
 
 const DetailsProduct = () => {
 
+    const isLogin =  localStorage.getItem('isLogin');
+
     const initialValue = {
         title: null,
         brand : null,
         category: null,
         description: null,
         discountPercentage: null,
-        price : null,   
-    }
+        price : null,      }
 
     const [selectedProduct , setSelectedProduct] = useState(null)
     const [newDataToRender , setNewDataToRender] = useState(initialValue)
@@ -50,6 +51,7 @@ const DetailsProduct = () => {
     }
 
     const handleChangesInputOther = (e, key) => {
+        setFlagControlDataToRender(1)
         setNewDataToRender({
             ...newDataToRender,
             [key]: e.target.value
@@ -58,7 +60,7 @@ const DetailsProduct = () => {
             ...newDataToRender2,
             [key]: e.target.value
         });
-        setFlagControlDataToRender(1)
+        
     }
 
     return(
@@ -96,74 +98,83 @@ const DetailsProduct = () => {
                             </tr>
                             <tr>
                                 <td>Categoría:</td>
-                                <td>{selectedProduct.category}</td>
+                                <td> {newDataToRender2.category === null ?   selectedProduct.category : newDataToRender2.category }</td>
                             </tr>
                             <tr> 
                                 <td>Descripción: </td>
-                                <td>{selectedProduct.description}</td>
+                                <td> {selectedProduct.description }</td>
                             </tr>
                             <tr>
                                 <td>Descuento:</td>
-                                <td> {selectedProduct.discountPercentage}</td> 
+                                <td> {selectedProduct.discountPercentage }</td>
                             </tr>
                             <tr> 
                                 <td>Precio:</td>
-                                <td>{selectedProduct.price}</td>
+                                <td> {newDataToRender2.price === null ?   selectedProduct.price : newDataToRender2.price }</td>
                             </tr>
                             <tr>
                                 <td>Calificación:</td>
-                                <td>{selectedProduct.rating}</td>  
+                                <td> {selectedProduct.rating }</td>
                             </tr>
                             <tr> 
                                 <td>Stock:</td>
-                                <td>{selectedProduct.stock}</td>
+                                <td> {selectedProduct.stock }</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={sendDataToModal}>
-                    Actualizar detalles
-                </button>
-                <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                    <div className="modal-header">
-                        <h1 className="modal-title fs-5" id="exampleModalLabel">ACTUALIZAR INFORMACIÓN DE PRODUCTO</h1>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                {isLogin === 'true' ? 
+
+                <Fragment>
+                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={sendDataToModal}>
+                        Actualizar detalles
+                    </button> 
+                    
+                    <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+        
+                        <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">ACTUALIZAR INFORMACIÓN DE PRODUCTO</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="input-group flex-nowrap">
+                                <span className="input-group-text" >Titulo:</span>
+                                <input onChange={(e) => handleChangesInput(e)} value={dataInputForFetch} className="form-control" />
+                            </div>
+                            <div className="input-group flex-nowrap">
+                                <span className="input-group-text" >Marca:</span>
+                                <input onChange={(e) => handleChangesInputOther(e, 'brand')} value={flagControlDataToRender === 0 ? selectedProduct.brand : newDataToRender2.brand} className="form-control" />
+                            </div>
+                            <div className="input-group flex-nowrap">
+                                <span className="input-group-text">Categoría:</span>
+                                <input onChange={(e) => handleChangesInputOther(e, 'category')} value={flagControlDataToRender === 0 ? selectedProduct.category : newDataToRender2.category} className="form-control" />
+                            </div>
+                            <div className="input-group flex-nowrap">
+                                <span className="input-group-text">Descripción</span>
+                                <input onChange={(e) => handleChangesInputOther(e, 'description')} value={flagControlDataToRender === 0 ? selectedProduct.description : newDataToRender2.description} className="form-control" />
+                            </div>
+                            <div className="input-group flex-nowrap">
+                                <span className="input-group-text">Descuento:</span>
+                                <input onChange={(e) => handleChangesInputOther(e, 'discountPercentage')} value={flagControlDataToRender === 0 ? selectedProduct.discountPercentage : newDataToRender2.discountPercentage} className="form-control" />
+                            </div>
+                            <div className="input-group flex-nowrap">
+                                <span className="input-group-text" >Precio:</span>
+                                <input onChange={(e) => handleChangesInputOther(e, 'price')} value={flagControlDataToRender === 0 ? selectedProduct.price : newDataToRender2.price} className="form-control" />
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => dispatcherUpdateFetchAndNewData()}>Guardar Cambios</button>
+                        </div>
+                        </div>
                     </div>
-                    <div className="modal-body">
-                        <div className="input-group flex-nowrap">
-                            <span className="input-group-text" >Titulo:</span>
-                            <input onChange={(e) => handleChangesInput(e)} value={dataInputForFetch} className="form-control" />
-                        </div>
-                        <div className="input-group flex-nowrap">
-                            <span className="input-group-text" >Marca:</span>
-                            <input onChange={(e) => handleChangesInputOther(e, 'brand')} value={flagControlDataToRender === 0 ? selectedProduct.brand : newDataToRender2.brand} className="form-control" />
-                        </div>
-                        <div className="input-group flex-nowrap">
-                            <span className="input-group-text">Categoría:</span>
-                            <input onChange={(e) => handleChangesInputOther(e, 'category')} value={flagControlDataToRender === 0 ? selectedProduct.category : newDataToRender2.category} className="form-control" />
-                        </div>
-                        <div className="input-group flex-nowrap">
-                            <span className="input-group-text">Descripción</span>
-                            <input onChange={(e) => handleChangesInputOther(e, 'description')} value={flagControlDataToRender === 0 ? selectedProduct.description : newDataToRender2.description} className="form-control" />
-                        </div>
-                        <div className="input-group flex-nowrap">
-                            <span className="input-group-text">Descuento:</span>
-                            <input onChange={(e) => handleChangesInputOther(e, 'discountPercentage')} value={flagControlDataToRender === 0 ? selectedProduct.discountPercentage : newDataToRender2.discountPercentage} className="form-control" />
-                        </div>
-                        <div className="input-group flex-nowrap">
-                            <span className="input-group-text" >Precio:</span>
-                            <input onChange={(e) => handleChangesInputOther(e, 'price')} value={flagControlDataToRender === 0 ? selectedProduct.price : newDataToRender2.price} className="form-control" />
-                        </div>
                     </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => dispatcherUpdateFetchAndNewData()}>Guardar Cambios</button>
-                    </div>
-                    </div>
-                </div>
-                </div>
+                </Fragment>
+                : <></>
+            }
             </Fragment>
             ) : ('cargando....')}
         </Fragment>

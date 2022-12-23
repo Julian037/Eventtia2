@@ -1,53 +1,19 @@
 import React, { useState } from 'react';
 import { createContext } from 'react';
+import { useHref } from 'react-router-dom';
 export const ProviderContext =  React.createContext({})
 
 export const Context = ({children}) => {
 
-    const [saludo, setSaludo] = useState('')
+    const [saludo, setSaludo] = useState('Información desde context')
     
+    const isLogin = localStorage.getItem('isLogin')
+
+
     return(
-        <ProviderContext.Provider value={{saludo, setSaludo}}>
+        <ProviderContext.Provider value={{saludo, setSaludo, isLogin}}>
             {children}
         </ProviderContext.Provider>
     )
 
 }
-
-
-
-
-// import React, { useEffect, useState } from 'react';
-
-
-
-// const SessionContext = React.createContext({
-//   codUsuario: '',
-//   nombre: 'julian',
-//   correo: '',
-//   urlAvatar: ''
-// });
-
-// export default SessionContext;
-
-// export const SessionContextProvider = (props) => {
-//   const [session, setSession] = useState({
-//     codUsuario: '',
-//     nombre: '',
-//     correo: '',
-//     urlAvatar: ''
-//   });
-  
-
-
-//   return (
-//     <SessionContext.Provider value={{ 
-//       codUsuario: session.codUsuario, 
-//       nombre: session.nombre, 
-//       correo: session.correo, 
-//       urlAvatar: session.urlAvatar }}>
-//       {props.children}
-//     </SessionContext.Provider>
-//   );
-// };
-  

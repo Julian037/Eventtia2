@@ -32,3 +32,17 @@
 .btnContainer{
     padding-right: 4%;
 }
+
+@media (max-width: 999px) { 
+    .product{
+        width: 50%;
+        margin: 1rem 0;
+    }
+}
+
+@media (max-width: 625px) { 
+    .product{
+        width: 1000%;
+        margin: 1rem 0;
+    }
+}
